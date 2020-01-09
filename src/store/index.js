@@ -1,8 +1,13 @@
-// import { createStore, applyMiddleware } from 'redux';
-// // import rootReducer from '../reducers';
-// // import apiMiddleware from '../middleware/api';
-// import thunk from 'redux-thunk';
-
-// const store = createStore(rootReducer, applyMiddleware(thunk));
-// // window.store = store;
-// // export default store;
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+import App from './components/App';
+const store = createStore(rootReducer);
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);

@@ -1,28 +1,17 @@
-// // import axios from 'axios';
+import axios from 'axios';
+import { SET_ARTICLE_DETAILS } from './type';
 
-// // export const FETCH_SOMETHING = 'FETCH_SOMETHING';
-// // const ROOT_URL =
-// //   'https://hn.algolia.com/api/v1/search_by_date?query=${searchitem}&tags=story';
+export function fetchArticleDetails() {
+  return function(dispatch) {
+    return axios.get('https://api.myjson.com/bins/19dtxc').then(({ data }) => {
+      dispatch(setArticleDetails(data));
+    });
+  };
+}
 
-// // export function fetchWeather(city) {
-// //   const url = `${ROOT_URL}&q=${aParamYouMayNeed}`;
-// //   const request = axios.get(url);
-
-// //   return {
-// //     type: FETCH_SOMETHING,
-// //     payload: request
-// //   };
-// // }
-
-// import axios from 'axios';
-// export function fetchArticleDetails() {
-//   return function(dispatch) {
-//     return axios
-//       .get(
-//         'https://hn.algolia.com/api/v1/search_by_date?query=${searchitem}&tags=story'
-//       )
-//       .then(({ data }) => {
-//         dispatch(setArticleDetails(data));
-//       });
-//   };
-// }
+function setArticleDetails(data) {
+  return {
+    type: SET_ARTICLE_DETAILS,
+    payload: data
+  };
+}
