@@ -1,83 +1,41 @@
-// import React, { Component }  from 'react';
-// import SearchBar from './Components/SearchBar';
-// import FetchData from './Components/FetchData';
-// import { connect } from 'react-redux';
-// import { fetchArticleDetails } from "../actions";
-
-// class App extends Component {
-//   state = {};
-
-//   componentDidMount() {
-//     this.props.fetchArticleDetails() ;
-//   render() {
-//     const { title, url, author } = this.props.data;
-
-//     return (
-//       <div>
-//         <SearchBar />
-//         <main>
-//           {this.props.isLoadingData ? (
-//             "Loading . . ."
-//           ) : (
-//             <Article
-//               title={title}
-//               url={url}
-//               author={author}
-//             />
-//           )}
-//         </main>
-//       </div>
-//     );
-//   }
-
-// }
-
-// const mapStateToProps = ({ data = {}, isLoadingData = false }) => ({
-//   data,
-//   isLoadingData
-// });
-// export default connect(
-//   mapStateToProps,
-//   {
-//     fetchArticleDetails
-//   }
-// )(App);
-
-// export default App;
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import SearchBar from './Components/SearchBar';
-import FetchData from './Components/FetchData';
-import { fetchArticleDetails } from './actions';
+import { setSearchValue, fetchData } from './actions/simpleAction';
 
+import './App.css';
+import { SearchResults } from './SearchResults';
 class App extends Component {
-  state = {};
-  componentDidMount() {
-    this.props.fetchArticleDetails();
+  constructor(props) {
+    super(props);
+    this.state = { searchvalue: '' };
   }
-  render() {
-    const { title, url, author } = this.props.data;
+  onChangehandler = event => {
+    this.props.setSearchValue(event.target.value);
+  };
+  searchHackernews = event => {
+    const query = this.props.searchvalue;
+    this.props.fetchData(query);
+  };
 
+  render() {
     return (
-      <div>
-        <SearchBar />
-        <main>
-          {this.props.isLoadingData ? (
-            'Loading . . .'
-          ) : (
-            <FetchData title={title} url={url} author={author} />
-          )}
-        </main>
+      <div className='App'>
+        <input type='text' onChange={this.onChangehandler}></input>
+        <button onClick={this.searchHackernews}>search </button>
+        <div>
+          {this.props.results && <SearchResults data={this.props.results} />}
+        </div>
       </div>
     );
   }
 }
-
-const mapStateToProps = ({ data = {}, isLoadingData = false }) => ({
-  data,
-  isLoadingData
+const mapStateToProps = state => ({
+  searchvalue: state.simpleReducer.searchvalue,
+  results: state.simpleReducer.results
 });
-export default connect(mapStateToProps, {
-  fetchArticleDetails
-})(App);
+
+const mapDispatchToProps = dispatch => ({
+  setSearchValue: value => dispatch(setSearchValue(value)),
+  fetchData: value => dispatch(fetchData(value))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
