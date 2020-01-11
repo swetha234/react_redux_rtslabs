@@ -5,10 +5,13 @@ export const SearchResults = props => {
     <div>
       {props.data.hits && props.data.hits.length ? (
         <ol>
+          <p style={{ fontFamily: 'Italic', fontSize: '20px' }}>
+            Here are the related links for your search
+          </p>
           {props.data.hits.map((hit, index) => {
             return (
-              <li key={index}>
-                <a href={hit.url} target='_blank'>
+              <li key={index} style={{ margin: '15px 0' }}>
+                <a href={hit.url} style={{ color: ' #blue ' }} target='_blank'>
                   {hit.title}
                 </a>
               </li>
