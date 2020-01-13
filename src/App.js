@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setSearchValue, fetchData } from './actions/simpleAction';
 import './App.css';
-import image from './image/logo.png';
 import { SearchResults } from './SearchResults';
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { searchvalue: '' };
   }
+
   onChangehandler = event => {
     this.props.setSearchValue(event.target.value);
   };
@@ -20,34 +20,22 @@ class App extends Component {
   render() {
     return (
       <div style={container}>
-        <div className='class'>
-          <div style={headerStyle}>
-            <h1>Hacker News</h1>
-            <input
-              style={boxStyle}
-              type='text'
-              onChange={this.onChangehandler}
-              placeholder='Search stories....'
-            ></input>
-            <div>
-              <button
-                style={{
-                  marginTop: '30px',
-                  height: '30px',
-                  width: '8%',
-                  borderRadius: '20px 20px',
-                  fontSize: '15px',
-                  fontFamily: 'Helvetica'
-                }}
-                onClick={this.searchHackernews}
-              >
-                Search{' '}
-              </button>{' '}
-            </div>
+        <div className='class1' style={headerStyle}>
+          <h1>Hacker News</h1>
+          <input
+            style={boxStyle}
+            type='text'
+            onChange={this.onChangehandler}
+            placeholder='Search stories....'
+          ></input>
+          <div>
+            <button style={buttonStyle} onClick={this.searchHackernews}>
+              Search{' '}
+            </button>{' '}
           </div>
         </div>
 
-        <div className='sub-class'>
+        <div className='class2'>
           <p
             style={{
               fontFamily: 'Helvetica',
@@ -73,6 +61,8 @@ const mapDispatchToProps = dispatch => ({
   fetchData: value => dispatch(fetchData(value))
 });
 
+//Styling
+
 const headerStyle = {
   background: '#333',
   color: '#fff',
@@ -92,6 +82,15 @@ const boxStyle = {
 const container = {
   height: 'auto',
   backgroundColor: '#f5eaea'
+};
+
+const buttonStyle = {
+  marginTop: '30px',
+  height: '30px',
+  width: '8%',
+  borderRadius: '20px 20px',
+  fontSize: '15px',
+  fontFamily: 'Helvetica'
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
