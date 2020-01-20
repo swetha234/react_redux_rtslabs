@@ -11,8 +11,13 @@ export const SearchResults = props => {
           {props.data.hits.map((hit, index) => {
             return (
               <li key={index} style={{ margin: '15px 0' }}>
-                <a href={hit.url} style={{ color: ' #blue ' }} target='_blank'>
-                  {hit.title}
+                <div>Title: {hit.title}</div>
+                <a
+                  href={hit.url}
+                  style={{ color: ' #blue ', alignItems: 'center' }}
+                  target='_blank'
+                >
+                  Open Link
                 </a>
               </li>
             );

@@ -6,7 +6,7 @@ import { SearchResults } from './SearchResults';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchvalue: '' };
+    this.state = { searchvalue: ' ' };
   }
 
   onChangehandler = event => {
@@ -45,6 +45,7 @@ class App extends Component {
           >
             Search Results...
           </p>
+
           {this.props.results && <SearchResults data={this.props.results} />}
         </div>
       </div>
