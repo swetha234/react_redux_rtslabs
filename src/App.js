@@ -21,7 +21,8 @@ class App extends Component {
     return (
       <div style={container}>
         <div className='class1' style={headerStyle}>
-          <h1>Hacker News</h1>
+          <h1>HACKER NEWS</h1>
+          <h3>The most readable results on the web...!!!</h3>
           <input
             style={boxStyle}
             type='text'
